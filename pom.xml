@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://apache.org"
+         xmlns:xsi="http://w3.org"
+         xsi:schemaLocation="http://apache.org http://apache.org">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Подключаем родительский POM Spring Boot (версия 3.3.3 идеально подходит для Java 21) -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.3</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>org.example</groupId>
+    <artifactId>javastudy1</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- 1. Драйвер Oracle (твоя проверенная рабочая версия) -->
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc11</artifactId>
+            <version>23.4.0.24.05</version>
+        </dependency>
+
+        <!-- 2. Стартер для REST API и встроенного сервера Tomcat -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 3. Стартер для автоматического управления СУБД (JPA / Hibernate) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Плагин для сборки исполняемого fat-jar архива под SLES/LWSA контейнеры -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
