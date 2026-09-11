@@ -1,7 +1,7 @@
-package service;
+package com.telecom.billing.service;
 
-import model.Subscriber;
-import repository.SubscriberRepository;
+import com.telecom.billing.model.Subscriber;
+import com.telecom.billing.repository.SubscriberRepository;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 

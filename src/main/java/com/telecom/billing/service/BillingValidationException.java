@@ -1,4 +1,4 @@
-package service;
+package com.telecom.billing.service;
 
 /**
  * Кастомное исключение для аварийных ситуаций в биллинге

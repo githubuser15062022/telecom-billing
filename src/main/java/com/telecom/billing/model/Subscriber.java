@@ -1,4 +1,4 @@
-package model;
+package com.telecom.billing.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,21 +7,21 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity // 1. Говорим Spring Boot, что этот класс — сущность БД
-@Table(name = "SUBSCRIBERS") // 2. ПРИВЕЛИ К ВЕРХНЕМУ РЕГИСТРУ ORACLE
+@Table(name = "SUBSCRIBERS", schema = "SYSTEM") // 2. Связываем строго с таблицей SUBSCRIBERS в схеме SYSTEM
 public class Subscriber {
 
     @Id // 3. Указываем, что MSISDN — это уникальный первичный ключ (Primary Key)
-    @Column(name = "MSISDN") // ПРИВЕЛИ К ВЕРХНЕМУ РЕГИСТРУ ORACLE
+    @Column(name = "MSISDN") // Название колонки строго в верхнем регистре СУБД Oracle
     private long msisdn;
 
-    @Column(name = "PLAN_ID") // ПРИВЕЛИ К ВЕРХНЕМУ РЕГИСТРУ ORACLE
+    @Column(name = "PLAN_ID") // Название колонки строго в верхнем регистре СУБД Oracle
     private int planId;
 
-    @Column(name = "BALANCE") // ПРИВЕЛИ К ВЕРХНЕМУ РЕГИСТРУ ORACLE
+    @Column(name = "BALANCE") // Название колонки строго в верхнем регистре СУБД Oracle
     private BigDecimal balance;
 
     // ==========================================
-    // КОНСТРУКТОРЫ (Остаются без изменений)
+    // КОНСТРУКТОРЫ
     // ==========================================
     public Subscriber() {
     }
@@ -33,7 +33,7 @@ public class Subscriber {
     }
 
     // ==========================================
-    // ГЕТТЕРЫ И СЕТТЕРЫ (Остаются без изменений)
+    // ГЕТТЕРЫ И СЕТТЕРЫ
     // ==========================================
     public long getMsisdn() {
         return msisdn;

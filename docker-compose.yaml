@@ -1,20 +1,48 @@
 version: '3.8'
 
 services:
-  # Наш микросервис биллинга
+  # 1. Наш микросервис биллинга
   billing-service:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: tenchat_billing_app
     ports:
-      - "8080:8080" # Пробрасываем порт 8080 из контейнера на твой ноутбук
+      - "8080:8080"
     environment:
-      # Меняем локальный хост подключения к Oracle на внутренний сетевой шлюз Docker
-      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@host.docker.internal:1521:XE
+      # ИСПРАВЛЕНО: Переключили точку входа на подключаемую БД petproject7 через косую черту
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@host.docker.internal:1521/petproject7
       - SPRING_DATASOURCE_USERNAME=system
       - SPRING_DATASOURCE_PASSWORD=0508
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=validate
+      # Указываем нашему Spring Boot, где искать брокер Kafka в сети Docker
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     extra_hosts:
-      # Магическая строчка, которая разрешает контейнеру выходить на твой локальный комп к Oracle
       - "host.docker.internal:host-gateway"
+    depends_on:
+      - kafka # Ждем, пока Кафка стартанет, прежде чем запускать бэкенд
     restart: always
+
+  # 2. Координатор Zookeeper (нужен для управления кластером Kafka)
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.0
+    container_name: tenchat_zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  # 3. Брокер сообщений Kafka
+  kafka:
+    image: confluentinc/cp-kafka:7.4.0
+    container_name: tenchat_kafka
+    ports:
+      - "9094:9094" # Пробрасываем порт наружу, если захотим подключиться с ноута
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL://localhost:9094
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1

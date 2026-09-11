@@ -1,4 +1,4 @@
-package service;
+package com.telecom.billing.service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
