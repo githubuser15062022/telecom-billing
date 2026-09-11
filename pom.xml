@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://apache.org"
          xmlns:xsi="http://w3.org"
          xsi:schemaLocation="http://apache.org http://apache.org">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Подключаем родительский POM Spring Boot (версия 3.3.3 идеально подходит для Java 21) -->
+    <!-- ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÑÐºÐ¸Ð¹ POM Spring Boot (Ð²ÐµÑ€ÑÐ¸Ñ 3.3.3 Ð¸Ð´ÐµÐ°Ð»ÑŒÐ½Ð¾ Ð¿Ð¾Ð´Ñ…Ð¾Ð´Ð¸Ñ‚ Ð´Ð»Ñ Java 21) -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -13,7 +13,7 @@
     </parent>
 
     <groupId>org.example</groupId>
-    <artifactId>javastudy1</artifactId>
+    <artifactId>telecom-billing</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -23,20 +23,20 @@
     </properties>
 
     <dependencies>
-        <!-- 1. Драйвер Oracle (твоя проверенная рабочая версия) -->
+        <!-- 1. Ð”Ñ€Ð°Ð¹Ð²ÐµÑ€ Oracle (Ñ‚Ð²Ð¾Ñ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐµÐ½Ð½Ð°Ñ Ñ€Ð°Ð±Ð¾Ñ‡Ð°Ñ Ð²ÐµÑ€ÑÐ¸Ñ) -->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ojdbc11</artifactId>
             <version>23.4.0.24.05</version>
         </dependency>
 
-        <!-- 2. Стартер для REST API и встроенного сервера Tomcat -->
+        <!-- 2. Ð¡Ñ‚Ð°Ñ€Ñ‚ÐµÑ€ Ð´Ð»Ñ REST API Ð¸ Ð²ÑÑ‚Ñ€Ð¾ÐµÐ½Ð½Ð¾Ð³Ð¾ ÑÐµÑ€Ð²ÐµÑ€Ð° Tomcat -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- 3. Стартер для автоматического управления СУБД (JPA / Hibernate) -->
+        <!-- 3. Ð¡Ñ‚Ð°Ñ€Ñ‚ÐµÑ€ Ð´Ð»Ñ Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ð³Ð¾ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð¡Ð£Ð‘Ð” (JPA / Hibernate) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -45,7 +45,7 @@
 
     <build>
         <plugins>
-            <!-- Плагин для сборки исполняемого fat-jar архива под SLES/LWSA контейнеры -->
+            <!-- ÐŸÐ»Ð°Ð³Ð¸Ð½ Ð´Ð»Ñ ÑÐ±Ð¾Ñ€ÐºÐ¸ Ð¸ÑÐ¿Ð¾Ð»Ð½ÑÐµÐ¼Ð¾Ð³Ð¾ fat-jar Ð°Ñ€Ñ…Ð¸Ð²Ð° Ð¿Ð¾Ð´ SLES/LWSA ÐºÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€Ñ‹ -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
