@@ -7,17 +7,17 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity // 1. Говорим Spring Boot, что этот класс — сущность БД
-@Table(name = "subscribers") // 2. Связываем класс с твоей таблицей в Oracle
+@Table(name = "SUBSCRIBERS") // 2. ПРИВЕЛИ К ВЕРХНЕМУ РЕГИСТРУ ORACLE
 public class Subscriber {
 
-    @Id // 3. Указываем, что msisdn — это уникальный первичный ключ (Primary Key)
-    @Column(name = "msisdn")
+    @Id // 3. Указываем, что MSISDN — это уникальный первичный ключ (Primary Key)
+    @Column(name = "MSISDN") // ПРИВЕЛИ К ВЕРХНЕМУ РЕГИСТРУ ORACLE
     private long msisdn;
 
-    @Column(name = "plan_id") // Мапим java-style поле на snake_case в БД
+    @Column(name = "PLAN_ID") // ПРИВЕЛИ К ВЕРХНЕМУ РЕГИСТРУ ORACLE
     private int planId;
 
-    @Column(name = "balance")
+    @Column(name = "BALANCE") // ПРИВЕЛИ К ВЕРХНЕМУ РЕГИСТРУ ORACLE
     private BigDecimal balance;
 
     // ==========================================

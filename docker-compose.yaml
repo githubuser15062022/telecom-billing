@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  # Наш микросервис биллинга
+  billing-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tenchat_billing_app
+    ports:
+      - "8080:8080" # Пробрасываем порт 8080 из контейнера на твой ноутбук
+    environment:
+      # Меняем локальный хост подключения к Oracle на внутренний сетевой шлюз Docker
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@host.docker.internal:1521:XE
+      - SPRING_DATASOURCE_USERNAME=system
+      - SPRING_DATASOURCE_PASSWORD=0508
+    extra_hosts:
+      # Магическая строчка, которая разрешает контейнеру выходить на твой локальный комп к Oracle
+      - "host.docker.internal:host-gateway"
+    restart: always

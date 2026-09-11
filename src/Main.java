@@ -2,6 +2,8 @@ import service.DatabaseConnectionManager;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.SQLException;
+import java.util.HashMap;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -51,6 +53,33 @@ public class Main {
                 System.out.println("❌ КРИТИЧЕСКИЙ СБОЙ: Неизвестная авария СУБД. Стопаем конвейер.");
             }
         }
+HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(10,0);
+        map.put(20,1);
+        if (map.containsKey(10)) {
+            System.out.println("Индекс числа 10 в мапе: " + map.get(10));
+        }
+        int[] nums = {2,7,11,15};
+        int target = 9;
+
+        HashMap<Integer, Integer> twinMap = new HashMap<>();
+        int[] result = new int[2];
+
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+
+            if (twinMap.containsKey(complement)) {
+                result[0] = twinMap.get(complement);
+                result[1] = i;
+                break;
+            }
+        twinMap.put(nums[i], i);
+
+
+        }
+        System.out.println("Результать Two Sum: [" + result[0] + "," + result[1] + "}");
+
+
 
         System.out.println("\n=== Программа завершила работу в штатном режиме ===");
     }
